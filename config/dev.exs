@@ -20,9 +20,9 @@ config :async_app, AsyncApp.Repo,
 config :async_app, AsyncAppWeb.Endpoint,
   # Binding to loopback ipv4 address prevents access from other machines.
   # Change to `ip: {0, 0, 0, 0}` to allow access from other machines.
-  http: [ip: {127, 0, 0, 1}, port: 4000],
+  http: [ip: {0, 0, 0, 0}, port: 4000],
   check_origin: false,
-  code_reloader: true,
+  code_reloader: false,
   debug_errors: true,
   secret_key_base: "H6bHLh8RuQkPuBT2/kAdm4dV2twk/l3vK/foWq97nsBvMyh+guifPwxKpZrAUW1O",
   watchers: [
