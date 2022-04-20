@@ -1,0 +1,22 @@
+version: '3.8'
+services:
+  web:
+    build: .
+    ports:
+      - "4000:4000"
+    volumes:
+      - .:/app
+    depends_on:
+      - db
+    env_file:
+      - async_app.env
+
+  db:
+    image: postgres:latest
+    environment:
+      - POSTGRES_USER=mriso79
+      - POSTGRES_PASSWORD=mris079
+    volumes:
+      - ./postgres-data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
