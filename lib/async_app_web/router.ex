@@ -21,9 +21,11 @@ defmodule AsyncAppWeb.Router do
   end
 
   # Other scopes may use custom stacks.
-  # scope "/api", AsyncAppWeb do
-  #   pipe_through :api
-  # end
+  scope "/api", AsyncAppWeb do
+     pipe_through :api
+
+    resources "/users", UserController
+  end
 
   # Enables LiveDashboard only for development
   #
