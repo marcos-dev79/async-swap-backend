@@ -25,7 +25,10 @@ defmodule AsyncAppWeb.Router do
      pipe_through :api
 
     resources "/users", UserController
-  end
+    resources "/issues", IssueController
+    resources "/contributors", ContributorController
+ end
+
 
   # Enables LiveDashboard only for development
   #
