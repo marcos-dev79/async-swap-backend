@@ -197,4 +197,7 @@ defmodule AsyncApp.GitRepo do
   def change_contributor(%Contributor{} = contributor, attrs \\ %{}) do
     Contributor.changeset(contributor, attrs)
   end
+
+
+
 end
