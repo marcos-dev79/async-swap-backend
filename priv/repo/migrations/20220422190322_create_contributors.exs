@@ -6,6 +6,7 @@ defmodule AsyncApp.Repo.Migrations.CreateContributors do
       add :name, :string
       add :user, :string
       add :qtd_commits, :integer
+      add :repository, :string
 
       timestamps()
     end

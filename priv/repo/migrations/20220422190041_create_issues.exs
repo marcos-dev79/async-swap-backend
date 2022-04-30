@@ -5,6 +5,7 @@ defmodule AsyncApp.Repo.Migrations.CreateIssues do
     create table(:issues) do
       add :title, :string
       add :authorandlabels, :string
+      add :repository, :string
 
       timestamps()
     end

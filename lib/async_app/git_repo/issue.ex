@@ -3,8 +3,9 @@ defmodule AsyncApp.GitRepo.Issue do
   import Ecto.Changeset
 
   schema "issues" do
-    field :authorandlabels, :string
     field :title, :string
+    field :authorandlabels, :string
+    field :repository, :string
 
     timestamps()
   end
@@ -12,7 +13,7 @@ defmodule AsyncApp.GitRepo.Issue do
   @doc false
   def changeset(issue, attrs) do
     issue
-    |> cast(attrs, [:title, :authorandlabels])
-    |> validate_required([:title, :authorandlabels])
+    |> cast(attrs, [:title, :authorandlabels, :repository])
+    |> validate_required([:title, :authorandlabels, :repository])
   end
 end

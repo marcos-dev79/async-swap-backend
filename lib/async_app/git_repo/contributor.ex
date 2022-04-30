@@ -4,8 +4,9 @@ defmodule AsyncApp.GitRepo.Contributor do
 
   schema "contributors" do
     field :name, :string
-    field :qtd_commits, :integer
     field :user, :string
+    field :qtd_commits, :integer
+    field :repository, :string
 
     timestamps()
   end
@@ -13,7 +14,7 @@ defmodule AsyncApp.GitRepo.Contributor do
   @doc false
   def changeset(contributor, attrs) do
     contributor
-    |> cast(attrs, [:name, :user, :qtd_commits])
-    |> validate_required([:name, :user, :qtd_commits])
+    |> cast(attrs, [:name, :user, :qtd_commits, :repository])
+    |> validate_required([:name, :user, :qtd_commits, :repository])
   end
 end
