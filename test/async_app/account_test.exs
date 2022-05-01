@@ -58,4 +58,58 @@ defmodule AsyncApp.AccountTest do
       assert %Ecto.Changeset{} = Account.change_user(user)
     end
   end
+
+  describe "responses" do
+    alias AsyncApp.Account.Response
+
+    import AsyncApp.AccountFixtures
+
+    @invalid_attrs %{response: nil}
+
+    test "list_responses/0 returns all responses" do
+      response = response_fixture()
+      assert Account.list_responses() == [response]
+    end
+
+    test "get_response!/1 returns the response with given id" do
+      response = response_fixture()
+      assert Account.get_response!(response.id) == response
+    end
+
+    test "create_response/1 with valid data creates a response" do
+      valid_attrs = %{response: "some response"}
+
+      assert {:ok, %Response{} = response} = Account.create_response(valid_attrs)
+      assert response.response == "some response"
+    end
+
+    test "create_response/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Account.create_response(@invalid_attrs)
+    end
+
+    test "update_response/2 with valid data updates the response" do
+      response = response_fixture()
+      update_attrs = %{response: "some updated response"}
+
+      assert {:ok, %Response{} = response} = Account.update_response(response, update_attrs)
+      assert response.response == "some updated response"
+    end
+
+    test "update_response/2 with invalid data returns error changeset" do
+      response = response_fixture()
+      assert {:error, %Ecto.Changeset{}} = Account.update_response(response, @invalid_attrs)
+      assert response == Account.get_response!(response.id)
+    end
+
+    test "delete_response/1 deletes the response" do
+      response = response_fixture()
+      assert {:ok, %Response{}} = Account.delete_response(response)
+      assert_raise Ecto.NoResultsError, fn -> Account.get_response!(response.id) end
+    end
+
+    test "change_response/1 returns a response changeset" do
+      response = response_fixture()
+      assert %Ecto.Changeset{} = Account.change_response(response)
+    end
+  end
 end
