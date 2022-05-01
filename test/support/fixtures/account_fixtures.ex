@@ -18,4 +18,18 @@ defmodule AsyncApp.AccountFixtures do
 
     user
   end
+
+  @doc """
+  Generate a response.
+  """
+  def response_fixture(attrs \\ %{}) do
+    {:ok, response} =
+      attrs
+      |> Enum.into(%{
+        response: "some response"
+      })
+      |> AsyncApp.Account.create_response()
+
+    response
+  end
 end

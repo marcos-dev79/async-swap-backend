@@ -47,6 +47,16 @@ config :logger, :console,
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
 
+config :async_app, AsyncApp.Scheduler,
+  jobs: [
+
+    # Every 5 minutes
+    {"*/5 * * * *", fn -> AsyncApp.Scheduler.getStuff end },
+    # Runs every midnight:
+    {"@daily", fn -> IO.puts("Hello QUANTUM!") end }
+  ]
+
+
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{config_env()}.exs"
