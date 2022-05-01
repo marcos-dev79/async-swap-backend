@@ -15,9 +15,12 @@ defmodule AsyncApp.Application do
       # Start the PubSub system
       {Phoenix.PubSub, name: AsyncApp.PubSub},
       # Start the Endpoint (http/https)
-      AsyncAppWeb.Endpoint
+      AsyncAppWeb.Endpoint,
       # Start a worker by calling: AsyncApp.Worker.start_link(arg)
       # {AsyncApp.Worker, arg}
+
+      #Scheduler
+      AsyncApp.Scheduler
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

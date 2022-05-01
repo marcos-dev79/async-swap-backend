@@ -50,7 +50,8 @@ defmodule AsyncApp.MixProject do
       {:jason, "~> 1.2"},
       {:plug_cowboy, "~> 2.5"},
       {:httpoison, "~> 1.8"},
-      {:poison, "~> 5.0"}
+      {:poison, "~> 5.0"},
+      {:quantum, "~> 3.0"}
     ]
   end
 
