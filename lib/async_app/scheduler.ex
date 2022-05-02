@@ -5,7 +5,17 @@ defmodule AsyncApp.Scheduler do
   alias AsyncApp.Account
 
   def getStuff do
-    user = Account.get_user!(1)
-    GitService.getContributors(user)
+    Account.list_users() |> Enum.each(
+      fn (us) ->
+        {:ok, contributors} = GitService.getContributors(us)
+        {:ok, issues} = GitService.getIssues(us)
+
+        url = System.get_env("WEBHOOK")
+        body = Poison.encode!(contributors.body <> "," <> issues.body)
+        headers = [{"Content-type", "application/json"}]
+        HTTPoison.post(url, body, headers, [])
+      end
+    )
+
   end
 end

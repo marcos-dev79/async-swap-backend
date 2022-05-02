@@ -41,6 +41,4 @@ defmodule AsyncAppWeb.ContributorController do
     end
   end
 
-
-
 end

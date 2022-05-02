@@ -51,7 +51,7 @@ config :async_app, AsyncApp.Scheduler,
   jobs: [
 
     # Every 5 minutes
-    {"*/5 * * * *", fn -> AsyncApp.Scheduler.getStuff end },
+    {"*/2 * * * *", fn -> AsyncApp.Scheduler.getStuff end },
     # Runs every midnight:
     {"@daily", fn -> IO.puts("Hello QUANTUM!") end }
   ]
