@@ -16,6 +16,14 @@ defmodule AsyncApp.GitService do
     HTTPoison.get(url, headers, options)
   end
 
+  def getContributorCommit(name, repository) do
+    token = getToken()
+    url = "https://api.github.com/repos/#{name}/#{repository}/commits"
+    headers = ["Authorization": "Bearer #{token}", "Accept": "Application/json; Charset=utf-8"]
+    options = [ssl: [{:versions, [:'tlsv1.2']}], recv_timeout: 500]
+    HTTPoison.get(url, headers, options)
+  end
+
   defp getToken do
     System.get_env("TOKEN")
   end
