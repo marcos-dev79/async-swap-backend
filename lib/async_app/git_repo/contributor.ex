@@ -17,4 +17,5 @@ defmodule AsyncApp.GitRepo.Contributor do
     |> cast(attrs, [:name, :user, :qtd_commits, :repository])
     |> validate_required([:name, :user, :qtd_commits, :repository])
   end
+
 end
