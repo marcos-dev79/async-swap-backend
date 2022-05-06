@@ -50,7 +50,7 @@ config :phoenix, :json_library, Jason
 config :async_app, AsyncApp.Scheduler,
   jobs: [
 
-    # Every 5 minutes
+    # Every 2 minutes
     {"*/2 * * * *", fn -> AsyncApp.Scheduler.getStuff end },
     # Runs every midnight:
     {"@daily", fn -> IO.puts("Hello QUANTUM!") end }
