@@ -13,21 +13,7 @@ defmodule AsyncApp.Scheduler do
         {:ok, contributors} = GitService.getContributors(us)
         {:ok, issues} = GitService.getIssues(us)
 
-        body = %Body{
-          user: us.username,
-          repository: us.repository,
-          issues: Poison.decode!(issues.body) |> Enum.map(
-            fn(iss) ->
-              label = Enum.map(iss["labels"], fn(x) -> x["name"] end)
-              %Issue{title: iss["title"], authorandlabels: iss["user"]["login"] <> " " <>  Enum.join(label, ", "), repository: us.repository }
-            end
-          ),
-          contributors: Poison.decode!(contributors.body) |> Enum.map(
-            fn(cont) ->
-              %Contributor{name: cont["type"], user: cont["login"], qtd_commits: 0, repository: us.repository}
-            end
-          )
-        }
+        body = bodyPrepare(us, contributors, issues)
 
         url = System.get_env("WEBHOOK")
         headers = [{"Content-type", "application/json"}]
@@ -35,6 +21,25 @@ defmodule AsyncApp.Scheduler do
 
       end
     )
+  end
+
+  def bodyPrepare(us, contributors, issues) do
+    %Body{
+      user: us.username,
+      repository: us.repository,
+      issues: Poison.decode!(issues.body) |> Enum.map(
+        fn(iss) ->
+          label = Enum.map(iss["labels"], fn(x) -> x["name"] end)
+          %Issue{title: iss["title"], authorandlabels: iss["user"]["login"] <> " " <>  Enum.join(label, ", "), repository: us.repository }
+        end
+      ),
+      contributors: Poison.decode!(contributors.body) |> Enum.map(
+        fn(cont) ->
+          %Contributor{name: cont["type"], user: cont["login"], qtd_commits: 0, repository: us.repository}
+        end
+      )
+    }
 
   end
+
 end
